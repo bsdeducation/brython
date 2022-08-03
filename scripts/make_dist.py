@@ -20,8 +20,9 @@ if sys.version_info[0] != 3:
 # path of parent directory
 pdir = os.path.dirname(os.getcwd())
 # version info
-version = [3, 8, 0, "final", 0]
-implementation = [3, 8, 0, "dev", 0]
+version = [3, 8, 0, "bsd_patch", 0]
+implementation = [3, 8, 0, "bsd_patch", 0]
+loop_timeout = 3
 
 # version name
 vname = '.'.join(str(x) for x in implementation[:3])
@@ -49,6 +50,7 @@ def run():
     # update version number
     with open(abs_path('version_info.js'), 'w') as vinfo_file_out:
         # implementation[2] = now
+        vinfo_file_out.write('__BRYTHON__.loop_timeout = %d\n'%loop_timeout)
         vinfo_file_out.write('__BRYTHON__.implementation = %s\n'
             %implementation)
         vinfo_file_out.write('__BRYTHON__.__MAGIC__ = "%s"\n' %
